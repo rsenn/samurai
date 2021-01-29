@@ -1,10 +1,18 @@
 .POSIX:
 
-PREFIX=/usr/local
-BINDIR=$(PREFIX)/bin
-MANDIR=$(PREFIX)/share/man
-ALL_CFLAGS=$(CFLAGS) -std=c99 -Wall -Wextra -Wpedantic -Wno-unused-parameter
-OBJ=\
+ifeq ($(DIET),0)
+PREFIX = /usr/local
+else
+PREFIX = /opt/diet
+CC = diet -Os gcc
+CFLAGS = -Os
+LDLIBS += -lcompat -lspawn -lpthread
+endif
+
+BINDIR = $(PREFIX)/bin
+MANDIR = $(PREFIX)/share/man
+ALL_CFLAGS = $(CFLAGS) -std=c99 -Wall -Wextra -Wpedantic -Wno-unused-parameter
+OBJ = \
 	build.o\
 	deps.o\
 	env.o\
@@ -17,7 +25,7 @@ OBJ=\
 	tool.o\
 	tree.o\
 	util.o
-HDR=\
+HDR = \
 	arg.h\
 	build.h\
 	deps.h\
