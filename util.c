@@ -57,6 +57,7 @@ xmalloc(size_t n)
 	return p;
 }
 
+#ifndef __dietlibc__
 static void *
 reallocarray(void *p, size_t n, size_t m)
 {
@@ -66,6 +67,7 @@ reallocarray(void *p, size_t n, size_t m)
 	}
 	return realloc(p, n * m);
 }
+#endif
 
 void *
 xreallocarray(void *p, size_t n, size_t m)

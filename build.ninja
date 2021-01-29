@@ -1,12 +1,13 @@
-cc = cc
-cflags = -Wall -Wextra -std=c99 -pedantic
+cc = diet-gcc
+cflags = -Os -Wall -Wextra -std=c99 -pedantic
+libs = -lspawn -lpthread -lcompat
 
 rule cc
   command = $cc -MD -MF $out.d $cflags -c -o $out $in
   depfile = $out.d
   deps = gcc
 rule link
-  command = $cc $ldflags -o $out $in
+  command = $cc $ldflags -o $out $in $libs
 
 build build.o: cc build.c
 build deps.o: cc deps.c

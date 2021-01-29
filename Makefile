@@ -35,7 +35,7 @@ HDR=\
 	$(CC) $(ALL_CFLAGS) -c -o $@ $<
 
 samu: $(OBJ)
-	$(CC) $(LDFLAGS) -o $@ $(OBJ)
+	$(CC) $(LDFLAGS) -o $@ $(OBJ) $(LDLIBS)
 
 $(OBJ): $(HDR)
 
